@@ -33,28 +33,12 @@ DATA = {
 # }
 
 
-def hello(request, dish):
+def calc(request, dish):
     servings = int(request.GET.get("servings", 1))
-    print('a = ', dish)
-    print(servings)
-    # print(DATA.get('omlet'))
-    print('data = ', DATA.get(dish))
-    # context = {}
-    # test = lambda x: x * 2, DATA.get('omlet') ???
     ingredients = {}
     for key in DATA.get(dish):
-        ingredients[key] = DATA.get(dish)[key] * 2
-    print('test = ', ingredients)
-    print(DATA.get(dish))
-    print(ingredients.get(dish))
+        ingredients[key] = DATA.get(dish)[key] * servings
     context = {
-        # 'recipe': {
-        #     'a': 2
-        # }
-        # 'recipe': DATA.get(a)
         'recipe': ingredients
     }
-    test = {}
-    # bad print(json.dumps(DATA.get('omlet')))
-    # return HttpResponse('Hello from django')
     return render(request, 'calculator/index.html', context)
